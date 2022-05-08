@@ -7,6 +7,6 @@ const recordRouter = Router();
 recordRouter.use(validaToken)
 recordRouter.get("/records", getRecords);
 recordRouter.post("/records", validaRegistro, postRecord);
-recordRouter.put("/records", validaRegistro, updateRecord);
-recordRouter.delete("/records", deleteRecord);
+recordRouter.put("/records/:id", validaRegistro, updateRecord);
+recordRouter.delete("/records/:id", deleteRecord);
 export default recordRouter;
