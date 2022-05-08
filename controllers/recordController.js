@@ -25,9 +25,6 @@ export async function postRecord(req, res) {
 export async function updateRecord(req, res) {
     const newRecord = req.body;
     const id = req.params;
-    console.log({newRecord}, {id})
-
-    const { user } = res.locals;
 
     await db.collection('records').updateOne({
         _id: new ObjectId(id)
@@ -39,10 +36,9 @@ export async function updateRecord(req, res) {
 }
 
 export async function deleteRecord(req, res) {
+    const id = req.params;
 
-    const { user } = res.locals;
-
-    await db.collection('records').deleteOne({ _id: user.userId });
+    await db.collection('records').deleteOne({ _id: new ObjectId(id) });
 
     res.sendStatus(200);
 }
