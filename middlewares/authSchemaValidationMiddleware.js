@@ -1,4 +1,4 @@
-import userSchema from "../schemas/userSchema.js";
+import userSchema from "../schemas/authSchema.js";
 
 export function validaUsuario(req, res, next) {
 const validation = userSchema.validate(req.body);
