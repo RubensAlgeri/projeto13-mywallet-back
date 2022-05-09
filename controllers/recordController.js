@@ -9,7 +9,17 @@ export async function getRecords(req, res) {
 
     const records = await db.collection("records").find({ id: user._id }).toArray();
 
-    res.send(records);
+    const entradas = records.filter(item => item.type === 'entrada')
+    const saidas = records.filter(item => item.type === 'saída')
+    let saldo = 0;
+    let balance;
+    entradas.map(item => item.value = (item.value.replace(',', '.')))
+    saidas.map(item => item.value = item.value.replace(',', '.'))
+    entradas.forEach(item => saldo += 1 * item.value)
+    saidas.forEach(item => saldo -= 1 * item.value)
+    if (saldo < 0) balance = { balance: (saldo * -1).toFixed(2), type: "saída" };
+    if (saldo > 0) balance = { balance: (saldo).toFixed(2), type: "entrada" }
+    res.send({records, balance});
 }
 
 export async function postRecord(req, res) {
