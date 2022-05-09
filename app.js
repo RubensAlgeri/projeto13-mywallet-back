@@ -7,7 +7,7 @@ app.use(cors())
 app.use(express.json());
 
 app.use(router);
-const porta = process.env.PORTA
+const porta = process.env.PORT
 app.listen(porta, () => {
     console.log(`Server is listening on port ${porta}.`);
 });
